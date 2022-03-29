@@ -2,17 +2,14 @@
 using CleanArchMvc.Domain.Interfaces;
 using CleanArchMvc.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CleanArchMvc.Infra.Data.Repositories
 {
     public class CategoryRepository : ICategoryRepository
     {
-        readonly ApplicationDbContext _categoryContext;
+        private ApplicationDbContext _categoryContext;
         public CategoryRepository(ApplicationDbContext context)
         {
             _categoryContext = context;

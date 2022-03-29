@@ -1,5 +1,4 @@
 using CleanArchMvc.Domain.Entities;
-using CleanArchMvc.Domain.Validation;
 using FluentAssertions;
 using System;
 using Xunit;
@@ -8,21 +7,21 @@ namespace CleanArchMvc.Domain.Tests
 {
     public class CategoryUnitTest1
     {
-        [Fact]
+        [Fact(DisplayName ="Create Category With Valid State")]
         public void CreateCategory_WithValidParameters_ResultObjectValidState()
         {
-            Action action = () => new Category(1, "Category Name");
+            Action action = () => new Category(1, "Category Name ");
             action.Should()
-                .NotThrow<DomainExceptionValidation>();
+                 .NotThrow<CleanArchMvc.Domain.Validation.DomainExceptionValidation>();
         }
 
         [Fact]
         public void CreateCategory_NegativeIdValue_DomainExceptionInvalidId()
         {
-            Action action = () => new Category(-1, "Category Name");
+            Action action = () => new Category(-1, "Category Name ");
             action.Should()
-                .Throw<DomainExceptionValidation>()
-                .WithMessage("Invalid Id value.");
+                .Throw<CleanArchMvc.Domain.Validation.DomainExceptionValidation>()
+                 .WithMessage("Invalid Id value.");
         }
 
         [Fact]
@@ -30,8 +29,8 @@ namespace CleanArchMvc.Domain.Tests
         {
             Action action = () => new Category(1, "Ca");
             action.Should()
-                .Throw<DomainExceptionValidation>()
-                .WithMessage("Invalid name, too short, minimun 3 characters.");
+                .Throw<CleanArchMvc.Domain.Validation.DomainExceptionValidation>()
+                   .WithMessage("Invalid name, too short, minimum 3 characters");
         }
 
         [Fact]
@@ -39,8 +38,8 @@ namespace CleanArchMvc.Domain.Tests
         {
             Action action = () => new Category(1, "");
             action.Should()
-                .Throw<DomainExceptionValidation>()
-                .WithMessage("Invalid name. Name is required.");
+                .Throw<CleanArchMvc.Domain.Validation.DomainExceptionValidation>()
+                .WithMessage("Invalid name.Name is required");
         }
 
         [Fact]
@@ -48,7 +47,7 @@ namespace CleanArchMvc.Domain.Tests
         {
             Action action = () => new Category(1, null);
             action.Should()
-                .Throw<DomainExceptionValidation>();
+                .Throw<CleanArchMvc.Domain.Validation.DomainExceptionValidation>();
         }
     }
 }

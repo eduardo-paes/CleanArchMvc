@@ -10,9 +10,6 @@ namespace CleanArchMvc.Domain.Entities
         public int Stock { get; private set; }
         public string Image { get; private set; }
 
-        public int CategoryId { get; set; }
-        public Category Category { get; set; }
-
         public Product(string name, string description, decimal price, int stock, string image)
         {
             ValidateDomain(name, description, price, stock, image);
@@ -33,32 +30,34 @@ namespace CleanArchMvc.Domain.Entities
 
         private void ValidateDomain(string name, string description, decimal price, int stock, string image)
         {
-            DomainExceptionValidation.When(string.IsNullOrWhiteSpace(name),
-                "Invalid name. Name is required.");
+            DomainExceptionValidation.When(string.IsNullOrEmpty(name), 
+                "Invalid name. Name is required");
 
             DomainExceptionValidation.When(name.Length < 3,
-                "Invalid name, too short, minimun 3 characters.");
+                "Invalid name, too short, minimum 3 characters");
 
-            DomainExceptionValidation.When(string.IsNullOrWhiteSpace(description),
-                "Invalid description. Description is required.");
+            DomainExceptionValidation.When(string.IsNullOrEmpty(description),
+                "Invalid description. Description is required");
 
-            DomainExceptionValidation.When(description.Length < 5,
-                "Invalid description, too short, minimun 5 characters.");
+            DomainExceptionValidation.When(description.Length < 5, 
+                "Invalid description, too short, minimum 5 characters");
 
-            DomainExceptionValidation.When(price < 0,
-                "Invalid price value.");
+            DomainExceptionValidation.When(price < 0, "Invalid price value");
 
-            DomainExceptionValidation.When(stock < 0,
-                "Invalid stock value.");
+            DomainExceptionValidation.When(stock < 0, "Invalid stock value");
 
             DomainExceptionValidation.When(image?.Length > 250,
-                "Invalid image name, too long, maximum 250 characters.");
+                "Invalid image name, too long, maximum 250 characters");
 
             Name = name;
             Description = description;
             Price = price;
             Stock = stock;
             Image = image;
+
         }
+
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
     }
 }

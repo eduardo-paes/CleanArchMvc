@@ -1,4 +1,9 @@
-﻿using CleanArchMvc.Infra.IoC;
+using CleanArchMvc.Infra.IoC;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace CleanArchMvc.WebUI
 {
@@ -41,7 +46,7 @@ namespace CleanArchMvc.WebUI
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Products}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
